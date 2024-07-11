@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     template: '%s | tentt dev',
   },
   description: 'tentt dev',
+  icons: `${baseUrl}/icon.png`,
   openGraph: {
     title: 'tentt dev',
     description: 'tentt dev',
