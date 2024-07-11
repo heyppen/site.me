@@ -54,7 +54,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className="mt-8 text-neutral-600 dark:text-neutral-300">
-        © {new Date().getFullYear()} boocai.me
+        © {new Date().getFullYear()} tentt.dev
       </p>
     </footer>
   );

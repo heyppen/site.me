@@ -1,6 +1,6 @@
 import { getBlogPosts } from 'app/blog/utils'
 
-export const baseUrl = 'https://boocai.me'
+export const baseUrl = 'https://tentt.dev'
 
 export default async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
