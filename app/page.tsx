@@ -3,9 +3,9 @@ import { Projects } from './components/projects'
 
 export default function Page() {
   return (
-    <section>
+    <section className='lg:mt-24'>
       <h1 className="text-2xl font-semibold tracking-tighter">
-        tentt dev
+      🏕️ tentt dev 
       </h1>
       <p className="mt-4">
         {`I'm tentt, an indie hacker starting at 2024.`}
