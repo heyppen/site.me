@@ -1,0 +1,29 @@
+---
+title: 'macOS menubar app dev: adaptive dark mode menubar icon'
+publishedAt: '2024-07-28'
+---
+
+The key is apple [`Template Image`](https://developer.apple.com/documentation/appkit/nsimage/1520017-template). 
+
+`Template Image` consists of only black and clear colors. 
+The most commonly used is SF Symbols and PNG/PDF:
+- All SF Symbols can be treated as template image
+- PNG/PDF of which name ends with `Template`, like `iconTemplate.png`
+
+<div className="w-full flex justify-center p-4"><img src="/iconTemplate.png" width="200px" /></div>
+
+## SwiftUI
+```swift
+let image = NSImage(named: "iconTemplate")
+image?.isTemplate = true
+statusItem.button.image = image
+```
+
+## Electron
+> [https://www.electronjs.org/docs/latest/api/native-image#imagesettemplateimageoption](https://www.electronjs.org/docs/latest/api/native-image#imagesettemplateimageoption)
+```js
+const { nativeImage, Tray } = require('electron')
+const trayIcon = nativeImage.createFromPath('/Users/somebody/images/iconTemplate.png')
+trayIcon.setTemplateImage(true)
+const tray = new Tray(trayIcon)
+```
