@@ -34,9 +34,9 @@ export async function GET() {
 
   const releases: Release[] = [];
   for (const r of res.data) {
-    if (r.assets && r.assets.length > 0) {
-      const asset = r.assets[0];
-    }
+    
+    const asset = findDmgAsset(r);
+    const download_link = asset ? BuildGithubAssetDownloadProxyUrl(asset.url) : '';
 
     releases.push({
       version: r.tag_name,
@@ -44,7 +44,7 @@ export async function GET() {
       link: "https://tentt.dev/OneStep",
       release_at: new Date(Date.parse(r.published_at)),
       release_notes_md: r.body,
-      download_link: BuildGithubAssetDownloadProxyUrl(r.url),
+      download_link: download_link,
     });
   }
 
@@ -54,6 +54,16 @@ export async function GET() {
       "Content-Type": "text/xml",
     },
   });
+}
+
+function findDmgAsset(release: any): any {
+  if (release && release.assets && release.assets.length > 0) {
+    for (const asset of release.assets) {
+      if (asset.name.endsWith(".dmg")) {
+        return asset;
+      }
+    }
+  }
 }
 
 function formatReleases(releases: Release[]): string {
