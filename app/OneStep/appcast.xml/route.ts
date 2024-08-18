@@ -1,8 +1,11 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = 'force-no-store';
+
 import { Octokit } from "@octokit/core";
 import { marked } from 'marked';
 
 const octokit = new Octokit({
-  auth: `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`,
+  auth: process.env.OneStepGithubToken,
 });
 
 type Release = {
