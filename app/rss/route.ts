@@ -1,4 +1,4 @@
-import { SiteBaseUrl } from 'app/sitemap'
+import { SiteBaseUrl } from 'app/global'
 import { getBlogPosts } from 'app/utils'
 
 export async function GET() {
