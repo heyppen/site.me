@@ -5,6 +5,7 @@ import { marked } from "marked";
 import { BuildGithubAssetDownloadProxyUrl, octokit } from "app/github";
 
 type Release = {
+  build_number: string;
   version: string;
   title: string;
   link: string;
@@ -39,7 +40,8 @@ export async function GET() {
     const download_link = asset ? BuildGithubAssetDownloadProxyUrl(asset.url) : '';
 
     releases.push({
-      version: r.tag_name,
+      build_number: r.tag_name,
+      version: r.name,
       title: r.name,
       link: "https://tentt.dev/OneStep",
       release_at: new Date(Date.parse(r.published_at)),
@@ -96,7 +98,8 @@ function formatRelease(r: Release): string {
 <item>
     <title>${r.title}</title>
     <link>${r.link}</link>
-    <sparkle:version>${r.version}</sparkle:version>
+    <sparkle:version>${r.build_number}</sparkle:version>
+    <sparkle:shortVersionString>${r.version}</sparkle:shortVersionString>
     <pubDate>${r.release_at.toUTCString()}</pubDate>
     <description><![CDATA[
         ${releaseNotesHtml}
