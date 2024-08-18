@@ -107,7 +107,10 @@ function formatRelease(r: Release): string {
     </description>
     <enclosure 
       url="${r.download_link}"
-      type="application/octet-stream" />
+      sparkle:edSignature="EnQymPvgv0MB+XtfFo7TVPTadupiV83ZHYYzHDAS5Ca/fPeDrdomabsndaUxPVxmOtNIetLH5iwRSbPyVKxJBw==" 
+      length="4796349"
+      type="application/octet-stream"
+       />
 </item>
   `;
 }
