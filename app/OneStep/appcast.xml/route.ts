@@ -12,6 +12,7 @@ type Release = {
   release_at: Date;
   release_notes_md: string;
   download_link: string;
+  signature: string;
 };
 
 export async function GET() {
@@ -25,7 +26,7 @@ export async function GET() {
       },
     }
   );
-  console.log(res);
+  // console.log(res);
 
   // return Response.json(res);
 
@@ -39,6 +40,12 @@ export async function GET() {
     const asset = findDmgAsset(r);
     const download_link = asset ? BuildGithubAssetDownloadProxyUrl(asset.url) : '';
 
+    const signautre = await getSignature(r);
+
+    if (!download_link || !signautre) {
+      continue
+    }
+
     releases.push({
       build_number: r.tag_name,
       version: r.name,
@@ -47,6 +54,7 @@ export async function GET() {
       release_at: new Date(Date.parse(r.published_at)),
       release_notes_md: r.body,
       download_link: download_link,
+      signature: signautre,
     });
   }
 
@@ -66,6 +74,28 @@ function findDmgAsset(release: any): any {
       }
     }
   }
+}
+
+async function getSignature(release: any) {
+  if (release && release.assets && release.assets.length > 0) {
+    for (const asset of release.assets) {
+      if (asset.name === 'sparkle_signature.txt') {
+        const url = asset.url;
+        const res = await octokit.request(url, {
+          headers: {
+            'X-GitHub-Api-Version': '2022-11-28',
+            Accept: "application/octet-stream",
+          }
+        })
+        // console.log('found signature:', asset)
+        // console.log(res)
+
+        let data = new TextDecoder("utf-8").decode(res.data);
+        return data;
+      }
+    }
+  }
+  return '';
 }
 
 function formatReleases(releases: Release[]): string {
@@ -107,8 +137,7 @@ function formatRelease(r: Release): string {
     </description>
     <enclosure 
       url="${r.download_link}"
-      sparkle:edSignature="EnQymPvgv0MB+XtfFo7TVPTadupiV83ZHYYzHDAS5Ca/fPeDrdomabsndaUxPVxmOtNIetLH5iwRSbPyVKxJBw==" 
-      length="4796349"
+      ${r.signature}
       type="application/octet-stream"
        />
 </item>
