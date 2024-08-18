@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/utils'
-import { baseUrl } from 'app/sitemap'
+import { SiteBaseUrl } from 'app/sitemap'
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -25,7 +25,7 @@ export function generateMetadata({ params }) {
   } = post.metadata
   let ogImage = image
     ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+    : `${SiteBaseUrl}/og?title=${encodeURIComponent(title)}`
 
   return {
     title,
@@ -35,7 +35,7 @@ export function generateMetadata({ params }) {
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${SiteBaseUrl}/blog/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -72,9 +72,9 @@ export default function Blog({ params }) {
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
             image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
+              ? `${SiteBaseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
+            url: `${SiteBaseUrl}/blog/${post.slug}`,
             author: {
               '@type': 'Person',
               name: 'tentt dev',

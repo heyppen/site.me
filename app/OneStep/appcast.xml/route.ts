@@ -1,12 +1,8 @@
 export const dynamic = "force-dynamic";
-export const fetchCache = 'force-no-store';
+export const fetchCache = "force-no-store";
 
-import { Octokit } from "@octokit/core";
-import { marked } from 'marked';
-
-const octokit = new Octokit({
-  auth: process.env.OneStepGithubToken,
-});
+import { marked } from "marked";
+import { BuildGithubAssetDownloadProxyUrl, octokit } from "app/github";
 
 type Release = {
   version: string;
@@ -29,6 +25,7 @@ export async function GET() {
     }
   );
   console.log(res);
+
   // return Response.json(res);
 
   if (res.status !== 200) {
@@ -37,13 +34,17 @@ export async function GET() {
 
   const releases: Release[] = [];
   for (const r of res.data) {
+    if (r.assets && r.assets.length > 0) {
+      const asset = r.assets[0];
+    }
+
     releases.push({
       version: r.tag_name,
       title: r.name,
       link: "https://tentt.dev/OneStep",
       release_at: new Date(Date.parse(r.published_at)),
       release_notes_md: r.body,
-      download_link: '',
+      download_link: BuildGithubAssetDownloadProxyUrl(r.url),
     });
   }
 
@@ -76,12 +77,10 @@ function formatReleases(releases: Release[]): string {
 }
 
 function formatRelease(r: Release): string {
-
-  let releaseNotesHtml = '';
+  let releaseNotesHtml = "";
   if (r.release_notes_md) {
-    releaseNotesHtml = marked.parse(r.release_notes_md, {async: false});
+    releaseNotesHtml = marked.parse(r.release_notes_md, { async: false });
   }
-
 
   return `
 <item>
@@ -93,10 +92,9 @@ function formatRelease(r: Release): string {
         ${releaseNotesHtml}
     ]]>
     </description>
-    <enclosure url="https://example.com/downloads/app.zip.or.dmg.or.tar.etc"
-                sparkle:edSignature="7cLALFUHSwvEJWSkV8aMreoBe4fhRa4FncC5NoThKxwThL6FDR7hTiPJh1fo2uagnPogisnQsgFgq6mGkt2RBw=="
-                length="1623481"
-                type="application/octet-stream" />
+    <enclosure 
+      url="${r.download_link}"
+      type="application/octet-stream" />
 </item>
   `;
 }
