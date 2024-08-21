@@ -1,4 +1,6 @@
 import Image from "next/image";
+// import { Analytics } from "@vercel/analytics/react";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 
 function ArrowIcon() {
   return (
@@ -17,10 +19,10 @@ function ArrowIcon() {
   );
 }
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="mb-16">
-      <ul className="font-sm mt-4 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
+    <footer className="mt-16 mb-8 w-full text-center font-mono text-sm">
+      {/* <ul className="font-sm mt-4 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
         <li>
           <a
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
@@ -32,17 +34,6 @@ export default function Footer() {
             <p className="ml-2 h-7">rss</p>
           </a>
         </li>
-        {/* <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://github.com/tenttd"
-          >
-            <ArrowIcon />
-            <p className="ml-2 h-7">github</p>
-          </a>
-        </li> */}
         <li>
           <a
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
@@ -54,10 +45,13 @@ export default function Footer() {
             <p className="ml-2 h-7">x/twitter</p>
           </a>
         </li>
-      </ul>
-      <p className="mt-2 text-neutral-600 dark:text-neutral-300">
+      </ul> */}
+      <p>Contact us at hi@tentt.dev</p>
+      <p className="mt-4">
         🏕️ © {new Date().getFullYear()} <a href="https://tentt.dev">tentt.dev</a>
       </p>
+      {/* <Analytics />
+      <SpeedInsights /> */}
     </footer>
   );
 }

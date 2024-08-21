@@ -1,23 +1,101 @@
-import { BlogPosts } from 'app/components/posts'
-import { Projects } from './components/projects'
+import { Inter, Caveat } from "next/font/google";
+// import { Analytics } from "@vercel/analytics/react";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import { BlogPosts } from "app/components/posts";
+import { Projects } from "./components/projects";
+import { cx } from "./ui";
+import { LightSvg } from "./components/icons";
+import Link from "next/link";
+import { Footer } from "./components/footer";
+
+const caveat = Caveat({ subsets: ["latin"], weight: "700" });
+
+const LIGHT_SIZE = 180;
 
 export default function Page() {
   return (
-    <section className='lg:mt-24'>
-      <h1 className="text-2xl font-semibold tracking-tighter">
-      🏕️ tentt dev 
-      </h1>
-      <p className="mt-4">
-        {`I'm tentt, an indie hacker starting at 2024.`}
-      </p>
-      <div className="mt-8">
-        <h2 className='mb-4 text-lg font-semibold'>Projects</h2>
-        <Projects />
-      </div>
-      <div className="mt-8">
-        <h2 className='mb-4 text-lg font-semibold'>Blogs</h2>
-        <BlogPosts />
-      </div>
-    </section>
-  )
+      <main className={cx("flex flex-col md:px-0", )}>
+        <section className="mt-4 flex-col items-center">
+          {/* Header */}
+          <div className="flex justify-center">
+            <div className="relative">
+              <LightSvg
+                className="absolute top-[-50px] left-[-40px]"
+                height={LIGHT_SIZE}
+                width={LIGHT_SIZE}
+              />
+              <img src="/logo.png" alt="icon" className="h-[96px]" />
+              <h1 className={cx("text-[32px] text-zinc-200", caveat.className)}>
+                tentt.dev
+              </h1>
+            </div>
+          </div>
+
+          {/* Projects */}
+          <div className="mt-8 md:mt-16 w-full text-center">
+            <h1
+              className={cx("text-[28px] font-bold", caveat.className)}
+              id="apps"
+            >
+              {/* &bull; &bull; &bull;  */}
+              Apps 
+              {/* &bull; &bull; &bull; */}
+            </h1>
+          </div>
+          <div className="mt-4 w-full flex flex-col gap-8 md:px-48">
+            <div className="flex font-mono">
+              <img src="/OneStep.png" className="h-24 min-w-24" />
+              <div className="p-2 flex flex-col justify-between">
+                <h2 className="font-medium tracking-wide text-lg">OneStep</h2>
+                <p className="text-sm">Operate your mac in one step</p>
+                <div className="flex gap-2">
+                  <Tag text="macOS" />
+                  <Tag text="Developing" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex font-mono">
+              <Link href={"https://www.syncx-app.com"} target="_blank">
+                <img src="/SyncX.png" className="h-24 min-w-24" />
+              </Link>
+              <div className="p-2 flex flex-col justify-between">
+                <h2 className="font-medium tracking-wide text-lg">SyncX</h2>
+                <p className="text-sm">Twitter/X sync tool</p>
+                <div className="flex gap-2">
+                  <Tag text="Electron" />
+                  <Tag text="macOS" />
+                  <Tag text="Windows" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex font-mono">
+              <Link href={"/wheremouse"}>
+                <img src="/WhereMouse.png" className="h-24 min-w-24" />
+              </Link>
+              <div className="p-2 flex flex-col justify-between">
+                <h2 className="font-medium tracking-wide text-lg">WhereMouse</h2>
+                <p className="text-sm">
+                  Ctrl+Ctrl to reveal your mouse position
+                </p>
+                <div>
+                  <Tag text="macOS" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* <Footer /> */}
+      </main>
+  );
+}
+
+function Tag({ text }: { text: string }) {
+  return (
+    <span className="border border-zinc-600 rounded-md w-fit px-1 text-xs">
+      {text}
+    </span>
+  );
 }
