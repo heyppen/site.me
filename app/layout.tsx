@@ -47,13 +47,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-zinc-900 text-zinc-200 ">
+      <body className="bg-zinc-900 text-zinc-200 m-auto max-w-3xl md:max-w-4xl px-4">
         {children}
         <Analytics />
         <SpeedInsights />
         <Footer />
       </body>
-      
     </html>
   );
 }
