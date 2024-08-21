@@ -6,7 +6,7 @@ export default function Index() {
         <a href="https://apps.apple.com/app/wheremouse/id6529533408">
           WhereMouse
         </a>{" "}
-        is a native macOS app, you can press <code>Ctrl+Ctrl</code> to reveal
+        is a free native macOS app, you can press <code>Ctrl+Ctrl</code> to reveal
         your mouse's position.
       </p>
       <img src="/wheremouse-site-screenshot.png" />

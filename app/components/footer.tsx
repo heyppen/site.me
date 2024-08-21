@@ -32,7 +32,7 @@ export default function Footer() {
             <p className="ml-2 h-7">rss</p>
           </a>
         </li>
-        <li>
+        {/* <li>
           <a
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
@@ -42,13 +42,13 @@ export default function Footer() {
             <ArrowIcon />
             <p className="ml-2 h-7">github</p>
           </a>
-        </li>
+        </li> */}
         <li>
           <a
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://x.com/tenttdev"
+            href="https://x.com/heytentt"
           >
             <ArrowIcon />
             <p className="ml-2 h-7">x/twitter</p>
