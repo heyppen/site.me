@@ -1,6 +1,13 @@
+import { SiteBaseUrl } from "app/global";
 import Image from "next/image";
+import Link from "next/link";
+import { Crimson_Text, IBM_Plex_Mono } from "next/font/google";
+import { cx } from "app/ui";
 // import { Analytics } from "@vercel/analytics/react";
 // import { SpeedInsights } from "@vercel/speed-insights/next";
+
+const crimson = Crimson_Text({ weight: "600", subsets: ["latin"] });
+const ibm = IBM_Plex_Mono({ weight: "400", subsets: ["latin"] });
 
 function ArrowIcon() {
   return (
@@ -21,7 +28,12 @@ function ArrowIcon() {
 
 export function Footer() {
   return (
-    <footer className="mt-16 mb-8 w-full text-center font-mono text-sm">
+    <footer
+      className={cx(
+        "mt-16 mb-8 w-full text-center font-mono text-sm",
+        ibm.className
+      )}
+    >
       {/* <ul className="font-sm mt-4 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
         <li>
           <a
@@ -46,9 +58,37 @@ export function Footer() {
           </a>
         </li>
       </ul> */}
-      <p>Contact us at hi@tentt.dev</p>
-      <p className="mt-4">
-        🏕️ © {new Date().getFullYear()} <a href="https://tentt.dev">tentt.dev</a>
+
+      <div className="w-full flex justify-center gap-2">
+        <Link
+          href="https://x.com/heytentt"
+          target="_blank"
+          className="text-[#4a99ea]"
+        >
+          twitter/x
+        </Link>
+
+        <span className="text-zinc-400">|</span>
+        <Link
+          href="https://discord.gg/pCdPeH6A6q"
+          target="_blank"
+          className="text-[#5b65ea]"
+        >
+          <img
+            src={`/discord-mark-blue.png`}
+            alt="screenshot"
+            className="w-4 h-4 inline-block"
+          />{" "}
+          discord server
+        </Link>
+        <span className="text-zinc-400">|</span>
+        <Link href="mailto:hi@tentt.dev" className="text-red-800">
+          hi@tentt.dev
+        </Link>
+      </div>
+
+      <p className="mt-2">
+        🏕️ © {new Date().getFullYear()} <a href={SiteBaseUrl}>tentt.dev</a>
       </p>
       {/* <Analytics />
       <SpeedInsights /> */}
