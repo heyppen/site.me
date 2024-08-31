@@ -10,13 +10,16 @@ import { SiteBaseUrl } from "./global";
 import Link from "next/link";
 
 const caveat = Caveat({ subsets: ["latin"], weight: "700" });
-const ibm = IBM_Plex_Mono({weight: "400", subsets: ['latin']});
+const ibm = IBM_Plex_Mono({ weight: "400", subsets: ["latin"] });
+const ibm_700 = IBM_Plex_Mono({ weight: "700", subsets: ["latin"] });
 
 const LIGHT_SIZE = 180;
 
 export default function Page() {
   return (
-    <main className={cx("mt-4 flex-col md:w-3xl items-center content-center", ibm.className)}>
+    <main
+      className={cx("mt-4 flex-col items-center content-center", ibm.className)}
+    >
       {/* <section className="w-full mt-4 flex-col items-center"> */}
       {/* Header */}
       <div className="flex justify-center">
@@ -35,47 +38,40 @@ export default function Page() {
         </Link>
       </div>
 
-      <H1 text="Apps" id="apps" />
-      <div className="mt-4 w-full flex flex-col gap-8 md:px-36">
-        <div className="flex font-mono">
-          <img src="/OneStep.png" className="h-24 min-w-24" />
-          <div className="p-2 flex flex-col justify-between">
-            <h2 className="font-medium tracking-wide text-lg">OneStep</h2>
-            <p className="text-sm">Operate your mac in one step</p>
-            <div className="flex gap-2">
-              <Tag text="macOS" />
-              <Tag text="Developing" />
-            </div>
-          </div>
-        </div>
+      <div className="w-full flex flex-col gap-4 md:gap-8 md:px-8">
+        <H1 text="Apps" id="apps" />
+        <App
+          image="/OneStep.png"
+          title="OneStep"
+          tags={["macOS", "Developing"]}
+          desc="Operate your mac easily and quickly in one step"
+          link="/"
+          preview_image="/OneStep-mockup.png"
+          bg_class="bg-gradient-to-br from-blue-600 to-blue-800"
+        />
 
-        <div className="flex font-mono">
-          <Link href={"https://www.syncx-app.com"} target="_blank">
-            <img src="/SyncX.png" className="h-24 min-w-24" />
-          </Link>
-          <div className="p-2 flex flex-col justify-between">
-            <h2 className="font-medium tracking-wide text-lg">SyncX</h2>
-            <p className="text-sm">Twitter/X sync tool</p>
-            <div className="flex gap-2">
-              <Tag text="Electron" />
-              <Tag text="macOS" />
-              <Tag text="Windows" />
-            </div>
-          </div>
-        </div>
+        <App
+          image="/SyncX.png"
+          title="SyncX"
+          tags={["Electron", "macOS", "Windows"]}
+          desc="Twitter/X sync tool"
+          link="https://www.syncx-app.com"
+          link_target="_blank"
+          preview_image="/SyncX-mockup.png"
+          preview_image_class="p-2 md:p-0"
+          bg_class="bg-gradient-to-b from-zinc-800 to-zinc-900"
+        />
 
-        <div className="flex font-mono">
-          <Link href={"/wheremouse"}>
-            <img src="/WhereMouse.png" className="h-24 min-w-24" />
-          </Link>
-          <div className="p-2 flex flex-col justify-between">
-            <h2 className="font-medium tracking-wide text-lg">WhereMouse</h2>
-            <p className="text-sm">Ctrl+Ctrl to reveal your mouse position</p>
-            <div>
-              <Tag text="macOS" />
-            </div>
-          </div>
-        </div>
+        <App
+          image="/WhereMouse.png"
+          title="WhereMouse"
+          tags={["macOS"]}
+          desc="Ctrl+Ctrl to reveal your mouse position"
+          link="/wheremouse"
+          preview_image="/wheremouse-mockup.png"
+          preview_image_class="p-4 md:p-3"
+          bg_class="bg-gradient-to-b from-red-800 to-red-700"
+        />
       </div>
 
       {/* <H1 text="Links" id="links" />
@@ -88,10 +84,72 @@ export default function Page() {
   );
 }
 
+function App({
+  image,
+  title,
+  tags,
+  desc,
+  link,
+  link_target,
+  preview_image,
+  preview_image_class,
+  bg_class,
+}: {
+  image: string;
+  title: string;
+  tags: string[];
+  desc: string;
+  link: string;
+  link_target?: string;
+  preview_image?: string;
+  preview_image_class?: string;
+  bg_class?: string;
+}) {
+  return (
+    <div
+      className={cx(
+        "flex flex-col items-start font-mono rounded-[24px] md:rounded-[28px] shadow-2xl p-2 md:p-6 overflow-clip",
+        bg_class ?? "bg-zinc-900"
+      )}
+    >
+      <div className="p-2">
+        <div className="flex">
+          <Link href={link} target={link_target ? link_target : ""}>
+            <img src={image} className="h-24 min-w-24" />
+          </Link>
+
+          <div className="p-4 flex flex-col justify-between">
+            <Link href={link} target={link_target ? link_target : ""}>
+              <h2 className="font-medium tracking-wide text-[24px]">{title}</h2>
+            </Link>
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Tag key={tag} text={tag} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="px-3 pt-2">
+          <p className="text-sm">{desc}</p>
+        </div>
+      </div>
+      {preview_image && (
+        <div className={cx(preview_image_class, "relative")}>
+          <Link href={link} target={link_target ? link_target : ""} 
+          className={title === "OneStep" ? "relative left-[-100px] md:left-[-300px]" : ""}
+          >
+            <img src={preview_image} className={title === "OneStep" ? "md:min-w-[1000px]" : ""} />
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function H1({ text, id }: { text: string; id: string }) {
   return (
-    <div className="mt-8 md:mt-16 w-full text-center">
-      <h1 className={cx("text-[28px] font-bold", caveat.className)} id={id}>
+    <div className="mt-4 md:mt-8 w-full text-left">
+      <h1 className={cx("text-[32px] font-extrabold text-red-600", ibm_700.className)} id={id}>
         {text}
       </h1>
     </div>
@@ -100,7 +158,7 @@ function H1({ text, id }: { text: string; id: string }) {
 
 function Tag({ text }: { text: string }) {
   return (
-    <span className="border border-zinc-600 rounded-md w-fit px-1 text-xs">
+    <span className="border border-zinc-400 rounded-md w-fit px-1 text-xs">
       {text}
     </span>
   );

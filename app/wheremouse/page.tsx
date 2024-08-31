@@ -10,7 +10,7 @@ export default function Page() {
           is a free native macOS app, you can press <code>Ctrl+Ctrl</code> to
           reveal your mouse's position.
         </p>
-        <img src="/wheremouse-site-screenshot.png" />
+        <img src="/wheremouse-mockup.png" />
 
         <h2>Privacy</h2>
         <p>
