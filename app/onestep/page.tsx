@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <div className="py-16">
       <div className="flex flex-col items-center justify-center md:flex-row md:gap-16 ">
-        <div className="md:mt-0 flex flex-col gap-8 md:gap-16">
+        <div className="md:mt-0 flex flex-col gap-8 md:gap-16 min-w-fit">
           <div className="flex items-center gap-4">
             <div>
               <img src="OneStep.png" className="w-[72px]" />
@@ -44,7 +44,7 @@ export default function Page() {
         </div>
 
         <div className="relative">
-          <img src="/OneStep-mockup2.png" className="w-full max-w-xl" />
+          <img src="/OneStep-mockup2.png" className="w-full max-w-3xl" />
         </div>
       </div>
 
