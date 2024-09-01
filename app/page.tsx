@@ -43,7 +43,7 @@ export default function Page() {
         <App
           image="/OneStep.png"
           title="OneStep"
-          tags={["macOS", "Developing"]}
+          tags={["macOS"]}
           desc="Operate your mac easily and quickly, with hot edge and a bunch of crafted bentos"
           link="/onestep"
           preview_image="/OneStep-mockup.png"
