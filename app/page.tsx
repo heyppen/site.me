@@ -44,8 +44,8 @@ export default function Page() {
           image="/OneStep.png"
           title="OneStep"
           tags={["macOS", "Developing"]}
-          desc="Operate your mac easily and quickly in one step"
-          link="/"
+          desc="Operate your mac easily and quickly, with hot edge and a bunch of crafted bentos"
+          link="/onestep"
           preview_image="/OneStep-mockup.png"
           bg_class="bg-gradient-to-br from-blue-600 to-blue-800"
         />
