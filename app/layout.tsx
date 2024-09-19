@@ -47,7 +47,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-zinc-950 text-zinc-200 m-auto max-w-3xl md:max-w-6xl px-4">
+      <body className="bg-zinc-950 text-zinc-200 m-auto max-w-full md:max-w-6xl px-4">
         {children}
         <Analytics />
         <SpeedInsights />
