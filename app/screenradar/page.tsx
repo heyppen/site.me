@@ -40,7 +40,9 @@ export default function Page() {
       <div className="mt-8 mx-2">
         <h2 className="text-2xl" id="privacy">Privacy</h2>
         <p>
-          ScreenRadar is an offline app, it does not collect any information.
+          ScreenRadar needs access to your mac screen recording so it can capture the screen and run OCR algorithm over the screenshot via apple Vision library, then you can copy/search the OCRed texts.
+          The screenshot and recognized data are all stored in local (in fact in memory).
+          ScreenRadar does not collect any information or share any data with anyone. It also works well without network.
         </p>
 
         <h2 className="mt-4 text-2xl" id="support">Support</h2>
