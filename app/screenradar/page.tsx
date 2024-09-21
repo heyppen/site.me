@@ -25,7 +25,7 @@ export default function Page() {
           </div>
 
           <div className="flex items-baseline gap-2">
-            <Link href="#">
+            <Link href="https://apps.apple.com/us/app/screenradar/id6683308728">
               <button className="w-fit px-8 py-3 bg-blue-600 text-xl rounded-full hover:bg-blue-700 tracking-wide cursor-pointer">
                 Download
               </button>

@@ -43,11 +43,25 @@ export default function Page() {
         <App
           image="/OneStep.png"
           title="OneStep"
-          tags={["macOS"]}
+          tags={["macOS native"]}
           desc="Operate your mac easily and quickly, with hot edge and a bunch of crafted bentos"
           link="/onestep"
+          link_class="relative left-[-100px] md:left-[-300px]"
           preview_image="/OneStep-mockup.png"
+          preview_image_class="md:min-w-[1000px]"
           bg_class="bg-gradient-to-br from-blue-600 to-blue-800"
+        />
+
+        <App
+          image="/ScreenRadar.png"
+          title="ScreenRadar"
+          tags={["macOS native", "App Store"]}
+          desc="OCR, Annotate, Copy, Search your mac Screen"
+          link="/screenradar"
+          link_class="relative left-[-100px] md:left-[-100px]"
+          preview_image="/ScreenRadar-mockup.png"
+          preview_image_class="max-h-[700px]"
+          bg_class="bg-gradient-to-br from-green-600 to-green-900"
         />
 
         <App
@@ -58,18 +72,18 @@ export default function Page() {
           link="https://www.syncx-app.com"
           link_target="_blank"
           preview_image="/SyncX-mockup.png"
-          preview_image_class="p-2 md:p-0"
+          preview_class="p-2 md:p-0"
           bg_class="bg-gradient-to-b from-zinc-800 to-zinc-900"
         />
 
         <App
           image="/WhereMouse.png"
           title="WhereMouse"
-          tags={["macOS"]}
+          tags={["macOS native"]}
           desc="Ctrl+Ctrl to reveal your mouse position"
           link="/wheremouse"
           preview_image="/wheremouse-mockup.png"
-          preview_image_class="p-4 md:p-3"
+          preview_class="p-4 md:p-3"
           bg_class="bg-gradient-to-b from-red-800 to-red-700"
         />
       </div>
@@ -91,7 +105,9 @@ function App({
   desc,
   link,
   link_target,
+  link_class,
   preview_image,
+  preview_class,
   preview_image_class,
   bg_class,
 }: {
@@ -101,14 +117,16 @@ function App({
   desc: string;
   link: string;
   link_target?: string;
+  link_class?: string;
   preview_image?: string;
+  preview_class?: string;
   preview_image_class?: string;
   bg_class?: string;
 }) {
   return (
     <div
       className={cx(
-        "flex flex-col items-start font-mono rounded-[24px] md:rounded-[28px] shadow-2xl p-2 md:p-6 overflow-clip",
+        "flex flex-col items-start font-mono text-white rounded-[24px] md:rounded-[28px] shadow-2xl p-2 md:p-6 overflow-clip",
         bg_class ?? "bg-zinc-900"
       )}
     >
@@ -134,11 +152,13 @@ function App({
         </div>
       </div>
       {preview_image && (
-        <div className={cx(preview_image_class, "relative")}>
-          <Link href={link} target={link_target ? link_target : ""} 
-          className={title === "OneStep" ? "relative left-[-100px] md:left-[-300px]" : ""}
+        <div className={cx(preview_class, "relative")}>
+          <Link
+            href={link}
+            target={link_target ? link_target : ""}
+            className={link_class}
           >
-            <img src={preview_image} className={title === "OneStep" ? "md:min-w-[1000px]" : ""} />
+            <img src={preview_image} className={preview_image_class} />
           </Link>
         </div>
       )}
@@ -149,7 +169,13 @@ function App({
 function H1({ text, id }: { text: string; id: string }) {
   return (
     <div className="mt-4 md:mt-8 w-full text-left">
-      <h1 className={cx("text-[32px] font-extrabold text-red-600", ibm_700.className)} id={id}>
+      <h1
+        className={cx(
+          "text-[32px] font-extrabold text-red-600",
+          ibm_700.className
+        )}
+        id={id}
+      >
         {text}
       </h1>
     </div>
